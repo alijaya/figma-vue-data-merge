@@ -1,18 +1,21 @@
-import pluginApi, { init as initPluginApi } from "./pluginApi";
+import api from "./api";
 
-initPluginApi();
+api.init();
 
-figma.showUI(__html__, { themeColors: true, height: 300 });
+figma.showUI(__html__);
 
 figma.on("selectionchange", () => {
-  figma.ui.postMessage({
-    type: "selectionchange",
-    selection: figma.currentPage.selection.map((node) => ({
-      id: node.id,
-      type: node.type,
-      name: node.name,
-    })),
-  });
+  api.uiApi.echo(
+    figma.currentPage.selection.map((node) => node.name).join(" ")
+  );
+  // figma.ui.postMessage({
+  //   type: "selectionchange",
+  //   selection: figma.currentPage.selection.map((node) => ({
+  //     id: node.id,
+  //     type: node.type,
+  //     name: node.name,
+  //   })),
+  // });
 });
 
 // restore previous size

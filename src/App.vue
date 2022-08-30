@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import Pages from "./pages/index.vue";
 import MyButton from "./components/MyButton.vue";
-import pluginApi, { init as initPluginApi } from "./pluginApi";
+import api from "./api";
+import { echoOutput } from "./store";
 
-initPluginApi();
+api.init();
 let count = ref(0);
 let counter = ref(0);
 
@@ -52,15 +53,15 @@ setInterval(() => {
 }, 1000);
 
 function createBox() {
-  pluginApi.createRectangle(0, 0, 100, 100);
+  api.pluginApi.createRectangle(0, 0, 100, 100);
 }
 
 function createCircle() {
-  pluginApi.createCircle(0, 0, 50);
+  api.pluginApi.createCircle(0, 0, 50);
 }
 
 function cancel() {
-  pluginApi.close();
+  api.pluginApi.close();
 }
 </script>
 
@@ -78,6 +79,8 @@ function cancel() {
         <MyButton primary @click="createCircle">Create Circle</MyButton>
         <MyButton secondary @click="cancel">Cancel</MyButton>
       </div>
+
+      <div>{{ echoOutput }}</div>
     </main>
 
     <svg

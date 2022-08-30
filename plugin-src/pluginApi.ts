@@ -1,5 +1,5 @@
-import { IPluginApi, PluginApiMethods } from "../common/iPluginApi";
-import { RequestDetail, ResponseDetail, SceneNode } from "../common/util";
+import { IPluginApi, PluginApiMethods } from "../common/IPluginApi";
+import { RequestDetail, ResponseDetail, SceneNode } from "../common/commonType";
 
 const pluginApi: IPluginApi = {
   async createRectangle(
@@ -34,26 +34,4 @@ const pluginApi: IPluginApi = {
   },
 };
 
-async function responseRemote(requestDetail: any, result: Promise<any>) {
-  const resolvedResult = await result;
-  figma.ui.postMessage({
-    response: requestDetail.request,
-    id: requestDetail.id,
-    result: resolvedResult,
-  });
-}
-
 export default pluginApi;
-export function init() {
-  figma.ui.on("message", (requestDetail: RequestDetail<any>) => {
-    if (requestDetail.request in pluginApi) {
-      responseRemote(
-        requestDetail,
-        (pluginApi[requestDetail.request as PluginApiMethods] as any).apply(
-          undefined,
-          requestDetail.params
-        )
-      );
-    }
-  });
-}

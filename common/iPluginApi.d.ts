@@ -1,4 +1,4 @@
-import type { SceneNode } from "./util";
+import type { SceneNode } from "./commonType";
 
 export interface IPluginApi {
   createRectangle(
