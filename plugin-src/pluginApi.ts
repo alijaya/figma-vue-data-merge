@@ -1,4 +1,4 @@
-import { IPluginApi, PluginApiMethods } from "../common/IPluginApi";
+import { IPluginApi } from "../common/IPluginApi";
 import { RequestDetail, ResponseDetail, SceneNode } from "../common/commonType";
 
 const pluginApi: IPluginApi = {
@@ -17,6 +17,7 @@ const pluginApi: IPluginApi = {
       id: rect.id,
       name: rect.name,
     };
+    figma.viewport.scrollAndZoomIntoView([rect]);
   },
   async createCircle(x: number, y: number, r: number): Promise<SceneNode> {
     var circle = figma.createEllipse();
@@ -28,9 +29,16 @@ const pluginApi: IPluginApi = {
       id: circle.id,
       name: circle.name,
     };
+    figma.viewport.scrollAndZoomIntoView([circle]);
   },
   async close(): Promise<void> {
     setTimeout(() => figma.closePlugin(), 0);
+  },
+  async resizeWindow(width: number, height: number): Promise<void> {
+    figma.ui.resize(width, height);
+    figma.clientStorage
+      .setAsync("windowSize", { width, height })
+      .catch((err) => {});
   },
 };
 

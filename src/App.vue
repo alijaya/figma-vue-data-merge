@@ -2,51 +2,38 @@
 import Pages from "./pages/index.vue";
 import MyButton from "./components/MyButton.vue";
 import api from "./api";
-import { echoOutput } from "./store";
+import { echoOutput, selections } from "./store";
 
 api.init();
 let count = ref(0);
 let counter = ref(0);
 
-let nodes = ref<{ id: string; type: string; name: string }[]>([]);
-
 let corner = ref<HTMLElement | null>(null);
 
-// window.onmessage = (event) => {
-//   const message = event.data.pluginMessage;
-//   if (message) {
-//     if (message.type === "selectionchange") {
-//       nodes.value = message.selection;
-//     }
-//   }
-// };
-
 function resizeWindow(e: MouseEvent) {
-  const size = {
-    w: Math.max(50, Math.floor(e.clientX + 5)),
-    h: Math.max(50, Math.floor(e.clientY + 5)),
-  };
-  // parent.postMessage({ pluginMessage: { type: "resize", size: size } }, "*");
+  const width = Math.max(50, Math.floor(e.clientX + 5));
+  const height = Math.max(50, Math.floor(e.clientY + 5));
+  api.pluginApi.resizeWindow(width, height);
 }
 
-// onMounted(() => {
-//   let cornerEl = corner.value;
+onMounted(() => {
+  let cornerEl = corner.value;
 
-//   if (cornerEl) {
-//     cornerEl.onpointerdown = (e) => {
-//       if (cornerEl) {
-//         cornerEl.onpointermove = resizeWindow;
-//         cornerEl.setPointerCapture(e.pointerId);
-//       }
-//     };
-//     cornerEl.onpointerup = (e) => {
-//       if (cornerEl) {
-//         cornerEl.onpointermove = null;
-//         cornerEl.releasePointerCapture(e.pointerId);
-//       }
-//     };
-//   }
-// });
+  if (cornerEl) {
+    cornerEl.onpointerdown = (e) => {
+      if (cornerEl) {
+        cornerEl.onpointermove = resizeWindow;
+        cornerEl.setPointerCapture(e.pointerId);
+      }
+    };
+    cornerEl.onpointerup = (e) => {
+      if (cornerEl) {
+        cornerEl.onpointermove = null;
+        cornerEl.releasePointerCapture(e.pointerId);
+      }
+    };
+  }
+});
 
 setInterval(() => {
   counter.value++;
@@ -68,19 +55,17 @@ function cancel() {
 <template>
   <div>
     <main class="m-4">
-      <ul>
-        <li v-for="node in nodes">
-          {{ node.id }}: {{ node.name }} ({{ node.type }})
-        </li>
-      </ul>
       <input v-model="count" class="border" />
       <div class="mt-4 flex space-x-4">
         <MyButton primary @click="createBox">Create Box</MyButton>
         <MyButton primary @click="createCircle">Create Circle</MyButton>
         <MyButton secondary @click="cancel">Cancel</MyButton>
       </div>
-
-      <div>{{ echoOutput }}</div>
+      <ul>
+        <li v-for="node in selections">
+          {{ node.id }}: {{ node.name }} ({{ node.type }})
+        </li>
+      </ul>
     </main>
 
     <svg

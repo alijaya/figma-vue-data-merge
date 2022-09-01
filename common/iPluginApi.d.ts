@@ -9,6 +9,7 @@ export interface IPluginApi {
   ): Promise<SceneNode>;
   createCircle(x: number, y: number, r: number): Promise<SceneNode>;
   close(): Promise<void>;
+  resizeWindow(width: number, height: number): Promise<void>;
 }
 
 export type PluginApiMethods = keyof IPluginApi;

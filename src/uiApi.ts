@@ -4,11 +4,14 @@ import type {
   ResponseDetail,
   SceneNode,
 } from "../common/commonType";
-import { echoOutput } from "./store";
+import { echoOutput, selections } from "./store";
 
 const uiApi: IUIApi = {
   async echo(text: string): Promise<void> {
     echoOutput.value = text;
+  },
+  async selectionChangeHandler(nodes: SceneNode[]): Promise<void> {
+    selections.value = nodes;
   },
 };
 

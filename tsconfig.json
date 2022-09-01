@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "allowJs": true
+    "allowJs": true,
+    "typeRoots": ["../node_modules/@types", "../node_modules/@figma"]
   },
   "exclude": ["node_modules", "dist", "plugin-src"],
   "include": [
