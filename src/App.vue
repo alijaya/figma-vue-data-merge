@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import Pages from "./pages/index.vue";
-import MyButton from "./components/MyButton.vue";
 import api from "./api";
 import { echoOutput, selections } from "./store";
 
@@ -66,6 +64,7 @@ function cancel() {
           {{ node.id }}: {{ node.name }} ({{ node.type }})
         </li>
       </ul>
+      <MyTweakpane />
     </main>
 
     <svg

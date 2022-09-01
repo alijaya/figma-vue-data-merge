@@ -92,6 +92,11 @@
     lodash.isplainobject "^4.0.6"
     lodash.merge "^4.6.2"
 
+"@tweakpane/core@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@tweakpane/core/-/core-1.1.0.tgz#a8290a7fbc1e0b63ba6ba87f53f8f21ed0401b65"
+  integrity sha512-vbbiQb+aoFI13lIbE7DJvhHZVE1YlUpGoaAamSpU6wLp2jA3VowS1wfRJBBB8IBCYm7nF6ULl7zfJKxl1XdyfA==
+
 "@vitejs/plugin-vue@^3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-vue/-/plugin-vue-3.0.3.tgz#7e3e401ccb30b4380d2279d9849281413f1791ef"
@@ -1254,6 +1259,11 @@ tslib@^2.1.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
   integrity sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==
+
+tweakpane@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/tweakpane/-/tweakpane-3.1.0.tgz#3ecaecf09c6234e27d0d8f101e16128b65fecc86"
+  integrity sha512-PGAp/LPQdHwzL7/iAW4lV1p9iPQTti7YMjMWO48CoYjvZRS59RmgQnhEGzKzqST1JnmOYmQUjTe8bdhlZRJs5A==
 
 typescript@^4.7.4:
   version "4.7.4"

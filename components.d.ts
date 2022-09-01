@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ButtonRepo: typeof import('./src/components/ButtonRepo.vue')['default']
     MyButton: typeof import('./src/components/MyButton.vue')['default']
+    MyTweakpane: typeof import('./src/components/MyTweakpane.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
